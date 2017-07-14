@@ -20,12 +20,9 @@ namespace Aquarium
       _myFish.Remove(fish);
     }
 
-    public void ListFish()
+    public List<Fish> ListFish()
     {
-      foreach (Fish fish in _myFish)
-      {
-          Console.WriteLine(fish.Name);
-      }
+      return _myFish;
     }
 
   }

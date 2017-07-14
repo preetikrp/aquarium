@@ -25,6 +25,7 @@ namespace Aquarium
             Console.WriteLine("Welcome to Aquarium Builder!!!");
             Console.WriteLine("1. Add fish to aquarium");
             Console.WriteLine("2. Remove fish from aquarium");
+            Console.WriteLine("3. Exit");
             ConsoleKeyInfo enteredKey = Console.ReadKey();
             Console.WriteLine("\n\n");
 
@@ -37,11 +38,19 @@ namespace Aquarium
                         c++;
                         Console.WriteLine($"{c}. {fish.Name}");
                     }
-                    ConsoleKeyInfo chosenFish = Console.ReadKey();
-                    Fish actualChosenFish = availableFish[(int)chosenFish.KeyChar - 1];
+                    string chosenFish = Console.ReadLine();
+                    int index = int.Parse(chosenFish) - 1;
 
+                    Fish actualChosenFish = availableFish[index];
+                    myAquarium.AddFish(actualChosenFish);
                     break;
                 case '2':
+                    int x = 0;
+                    foreach (Fish fish in myAquarium.ListFish())
+                    {
+                        x++;
+                        Console.WriteLine($"{x}. {fish.Name}");
+                    }
 
                     break;
                 default:
