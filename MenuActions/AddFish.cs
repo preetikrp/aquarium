@@ -17,7 +17,12 @@ namespace Aquarium.MenuActions
       Console.Write("> ");
       var chosenFish = Console.ReadKey();
       Console.WriteLine("");
-      a.AddFish(inventory[int.Parse(chosenFish.KeyChar.ToString()) - 1]);
+
+      var keyPressed = chosenFish.KeyChar.ToString();
+      var integerValueOfKeyPressed = int.Parse(keyPressed);
+      var fishInInventory = inventory[integerValueOfKeyPressed - 1];
+
+      a.AddFish(fishInInventory);
     }
   }
 }
