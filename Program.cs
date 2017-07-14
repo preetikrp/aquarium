@@ -1,5 +1,6 @@
 ﻿using System;
 using Wildlife;
+using Aquarium.MenuActions;
 using System.Collections.Generic;
 
 namespace Aquarium
@@ -8,68 +9,37 @@ namespace Aquarium
     {
         static void Main(string[] args)
         {
-            List<Fish> availableFish = new List<Fish>(){
-                new Fish("Redfish"),
-                new Fish("Bluefish"),
-                new Fish("Tuna"),
-                new Fish("Sunfish"),
-                new Fish("Betta"),
-                new Fish("Goldfish"),
-                new Fish("Clownfish"),
-                new Fish("Puffer"),
-                new Fish("Stonefish")
-            };
+            // Create the fish store instance
+            FishStore store = new FishStore();
 
+            // Create the aquarium that will hold purchased fish
             Aquarium myAquarium = new Aquarium();
 
-            Console.WriteLine("Welcome to Aquarium Builder!!!");
-            Console.WriteLine("1. Add fish to aquarium");
-            Console.WriteLine("2. Remove fish from aquarium");
-            Console.WriteLine("3. Exit");
-            ConsoleKeyInfo enteredKey = Console.ReadKey();
-            Console.WriteLine("\n\n");
+            // Create the main menu builder
+            MenuBuilder menu = new MenuBuilder();
 
-            switch (enteredKey.KeyChar)
+            // Choice will hold the number entered by the user
+            // after main menu ws displayed
+            int choice;
+
+            do
             {
-                case '1':
-                    int c = 0;
-                    foreach (Fish fish in availableFish)
-                    {
-                        c++;
-                        Console.WriteLine($"{c}. {fish.Name}");
-                    }
-                    string chosenFish = Console.ReadLine();
-                    int index = int.Parse(chosenFish) - 1;
+                // Show the main menu
+                choice = menu.ShowMainMenu();
 
-                    Fish actualChosenFish = availableFish[index];
-                    myAquarium.AddFish(actualChosenFish);
-                    break;
-                case '2':
-                    int x = 0;
-                    foreach (Fish fish in myAquarium.ListFish())
-                    {
-                        x++;
-                        Console.WriteLine($"{x}. {fish.Name}");
-                    }
+                switch (choice)
+                {
+                    // Menu option 1: Adding fish
+                    case 1:
+                        AddFish.DoAction(store, myAquarium);
+                        break;
 
-                    break;
-                default:
-                    break;
-
-            }
+                    // Menu option 2: Removing fish
+                    case 2:
+                        RemoveFish.DoAction(myAquarium);
+                        break;
+                }
+            } while (choice != 3);
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
